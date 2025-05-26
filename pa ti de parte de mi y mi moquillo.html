@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi bebe linda María Flor, mi amor</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #faf0f5;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            color: #6a1b9a;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.2em;
+            margin: 20px 0;
+            color: #9c27b0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .message-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            border: 1px solid #e1bee7;
+        }
+        
+        .message {
+            font-size: 1.2em;
+            line-height: 1.8;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .photo-slider {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(156, 39, 176, 0.3);
+            border: 5px solid white;
+            position: relative;
+            background: #f3e5f5;
+        }
+        
+        .photo-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .photo-slide.active {
+            opacity: 1;
+        }
+        
+        /* Corazones animados */
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 1;
+            opacity: 0.8;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+        
+        /* Gerberas estilizadas */
+        .gerbera {
+            position: absolute;
+            pointer-events: none;
+            animation: float 8s ease-in-out infinite;
+            z-index: 2;
+            width: 60px;
+            height: 60px;
+        }
+        
+        .gerbera .petals {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .gerbera .petal {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: #ff80ab;
+            border-radius: 50%;
+            opacity: 0.9;
+            transform-origin: center;
+        }
+        
+        .gerbera .center {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ffd600;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ba68c8, #e91e63);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+            text-align: right;
+            margin-top: 20px;
+            color: #9c27b0;
+        }
+        
+        .photo-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .photo-control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d1c4e9;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .photo-control.active {
+            background: #9c27b0;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Para María Flor</h1>
+        
+        <div class="photo-slider" id="photoSlider">
+            <!-- INSTRUCCIONES PARA LAS FOTOS:
+                 1. Guarda este archivo HTML en la misma carpeta donde tienes las fotos
+                 2. Cambia los nombres de "foto1.jpg", "foto2.jpg", etc. por tus nombres de archivo reales
+                 3. Puedes agregar o quitar líneas de imágenes según cuántas fotos tengas
+                 4. Si las fotos están en otra carpeta, escribe la ruta (ej: "fotos/maria1.jpg")
+            -->
+            <img src="foto1.jpg" class="photo-slide active" alt="María Flor 1">
+            <img src="foto2.jpg" class="photo-slide" alt="María Flor 2">
+            <img src="foto3.jpg" class="photo-slide" alt="María Flor 3">
+            <img src="foto4.jpg" class="photo-slide" alt="María Flor 4">
+            <img src="foto5.jpg" class="photo-slide" alt="María Flor 5">
+            <img src="foto6.jpg" class="photo-slide" alt="María Flor 6">
+            <img src="foto7.jpg" class="photo-slide" alt="María Flor 7">
+            <img src="foto8.jpg" class="photo-slide" alt="María Flor 8">
+            <img src="foto9.jpg" class="photo-slide" alt="María Flor 9">
+            <img src="foto10.jpg" class="photo-slide" alt="María Flor 10">
+        </div>
+        
+        <div class="photo-controls" id="photoControls">
+            <!-- Los controles se generan automáticamente con JavaScript -->
+        </div>
+        
+        <div class="message-box">
+            <div class="message">
+                <p>María Flor, eres lo más hermoso de mi vida.</p>
+                <p>Cada día a tu lado es un regalo que atesoro.</p>
+                <p>No puedo esperar para poder sentir tu calor,</p>
+                <p>abrazarte fuerte y besarte sin prisa.</p>
+                <p>Tu amor da color a mi mundo.</p>
+            </div>
+            
+            <div class="signature">Con todo mi amor</div>
+        </div>
+        
+        <div class="btn-container">
+            <button class="btn" id="btnHearts">Lluvia de corazones</button>
+            <button class="btn" id="btnFlowers">Gerberas para ti</button>
+        </div>
+    </div>
+
+    <script>
+        // Carrusel de fotos
+        const slides = document.querySelectorAll('.photo-slide');
+        const photoControls = document.getElementById('photoControls');
+        let currentSlide = 0;
+        
+        // Crear controles para cada foto
+        slides.forEach((slide, index) => {
+            const control = document.createElement('div');
+            control.className = 'photo-control';
+            if(index === 0) control.classList.add('active');
+            control.addEventListener('click', () => {
+                goToSlide(index);
+            });
+            photoControls.appendChild(control);
+        });
+        
+        function goToSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            document.querySelectorAll('.photo-control')[currentSlide].classList.remove('active');
+            
+            currentSlide = (n + slides.length) % slides.length;
+            
+            slides[currentSlide].classList.add('active');
+            document.querySelectorAll('.photo-control')[currentSlide].classList.add('active');
+        }
+        
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+        
+        // Cambiar foto cada 3 segundos
+        setInterval(nextSlide, 3000);
+        
+        // Crear corazones que caen
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = -50 + 'px';
+            heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+            heart.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+        
+        // Crear gerberas realistas
+        function createGerbera() {
+            const colors = ['#ff80ab', '#ff4081', '#f50057', '#c2185b'];
+            const gerbera = document.createElement('div');
+            gerbera.className = 'gerbera';
+            
+            const petals = document.createElement('div');
+            petals.className = 'petals';
+            
+            // Crear pétalos de gerbera (2 capas)
+            const petalCount = 16;
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                petal.style.transform = `rotate(${i * (360 / petalCount)}deg) translateX(20px)`;
+                petal.style.width = `${Math.random() * 10 + 25}px`;
+                petal.style.height = `${Math.random() * 5 + 15}px`;
+                petals.appendChild(petal);
+                
+                // Segunda capa de pétalos (más pequeños)
+                if (i % 2 === 0) {
+                    const innerPetal = document.createElement('div');
+                    innerPetal.className = 'petal';
+                    innerPetal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    innerPetal.style.opacity = '0.7';
+                    innerPetal.style.transform = `rotate(${i * (360 / petalCount)}deg) translateX(12px)`;
+                    innerPetal.style.width = `${Math.random() * 8 + 15}px`;
+                    innerPetal.style.height = `${Math.random() * 4 + 10}px`;
+                    petals.appendChild(innerPetal);
+                }
+            }
+            
+            gerbera.appendChild(petals);
+            
+            // Centro de la gerbera
+            const center = document.createElement('div');
+            center.className = 'center';
+            gerbera.appendChild(center);
+            
+            // Posición aleatoria
+            gerbera.style.left = Math.random() * 100 + 'vw';
+            gerbera.style.top = Math.random() * 100 + 'vh';
+            gerbera.style.transform = `scale(${Math.random() * 0.7 + 0.7})`;
+            gerbera.style.animationDuration = (Math.random() * 10 + 5) + 's';
+            gerbera.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(gerbera);
+            
+            setTimeout(() => {
+                gerbera.remove();
+            }, 15000);
+        }
+        
+        // Generar algunos elementos al inicio
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createHeart, i * 400);
+            setTimeout(createGerbera, i * 600);
+        }
+        
+        // Botones interactivos
+        document.getElementById('btnHearts').addEventListener('click', function() {
+            for (let i = 0; i < 25; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        });
+        
+        document.getElementById('btnFlowers').addEventListener('click', function() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createGerbera, i * 150);
+            }
+        });
+        
+        // Efecto continuo de pétalos
+        setInterval(() => {
+            if (Math.random() > 0.6) {
+                createGerbera();
+            }
+        }, 2500);
+    </script>
+</body>
+</html>
